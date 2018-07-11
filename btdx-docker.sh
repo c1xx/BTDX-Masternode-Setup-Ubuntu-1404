@@ -26,7 +26,7 @@ clear
 REUSE="No"
 printf "\nDOCKER SETUP FOR ${BTDX_COL}BITCLOUD (BTDX)${NO_COL} MASTERNODE SERVER\n"
 printf "\nSetup Config file"
-printf "\n-----------------"
+printf "\n-----------------\n"
 if [ -f "$CONFIG" ]
 then
         printf "\nFound $CONFIG on your system.\n"
@@ -40,12 +40,14 @@ if [[ $REUSE =~ "N" ]] || [[ $REUSE =~ "n" ]]; then
 	if [[ ("$ipaddress" == "n" || "$ipaddress" == "N") ]]; then
 		printf "\nEnter the IP-address of your ${BTDX_COL}BitCloud${NO_COL} Masternode VPS and Hit [ENTER]: "
 		read BTDX_IP
+	else
+		BTDX_IP=$(echo $IP)
 	fi
         printf "Enter your ${BTDX_COL}BitCloud${NO_COL} Masternode genkey respond and Hit [ENTER]: "
         read MN_KEY
 else
 	source $CONFIG
-        BTDX_IP=$(echo $IP)
+        BTDX_IP=$(echo $externalip)
         MN_KEY=$(echo $masternodeprivkey)
 fi
 
